@@ -1,3 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.ruff_cache/
+
+# Environment and secrets
+.env
+.venv/
+
+# IDE and OS
 .idea/
+.vscode/
+.DS_Store
+
+# Heavy or rebuildable data. Kept in git: data/processed (parsed rulebook),
+# data/tables/*.md (data dictionary) and data/eval (frozen test set, results).
 data/raw/
 data/tables/*.sqlite
+data/vectors.db
+data/eval/answers*.jsonl
+data/logs/
+
+# Course material
+support/
+
+# Backups
+*.bak
