@@ -1,0 +1,77 @@
+user_input,faithfulness,factual_correctness(mode=f1),llm_context_precision_with_reference,context_recall,sources,response
+Movement phase aircraft rules,1.0,0.35,0.0,0.4,Rulebook,"Based on the provided context, the rules regarding Aircraft in the Movement phase are as follows:
+
+* ""Aircraft models cannot Advance, Fall Back or Remain Stationary. If, when an Aircraft model is selected to move in the Movement phase, any enemy units are within Engagement Range of it, that Aircraft model can still make a Normal move.""
+* ""When a unit is selected to move in the Movement phase, if the only enemy models that are within Engagement Range of that unit are Aircraft models, then that unit can still make a Normal or Advance move.""
+* ""Whenever a model makes any kind of move, it can be moved over enemy Aircraft models as if they were not there, and can be moved within Engagement Range of enemy Aircraft models, but it cannot end that move on top of another model or within Engagement Range of any enemy Aircraft models."""
+What is the maximum combined points value permitted for units placed into Strategic Reserves before a Strike Force battle?,1.0,1.0,0.49999999995,1.0,Rulebook,"Based on the provided context, the maximum combined points value permitted for units placed into Strategic Reserves before a Strike Force battle is 500. 
+
+Relevant rule text and figures:
+| BATTLE SIZE | MAXIMUM COMBINED POINTS VALUE OF UNITS THAT CAN BE PLACED INTO STRATEGIC RESERVES BEFORE THE BATTLE |
+| Strike Force | 500 |"
+How do shooting restrictions for a Monster model equipped with Pistols differ from other models?,0.8333333333333334,0.8,0.9999999999,1.0,Rulebook,"Based on the provided context, the rules for a Monster model equipped with Pistols differ from other models in the following ways:
+
+1. Unlike other models, which cannot shoot with their Pistols and other ranged weapons together, a Monster can shoot with both: ""If a model is equipped with one or more Pistols, unless it is a Monster or Vehicle model, it can either shoot with its Pistols or with all of its other ranged weapons.""
+2. Unlike other models, a Monster can shoot its non-Pistol weapons alongside Pistols: ""Cannot be shot alongside any other non-Pistol weapon (except by a Monster or Vehicle)."""
+Hey what do I need to roll on my D6 compared to my model BS to score a hit with a ranged weapon?,1.0,0.4,0.9166666666361111,1.0,Rulebook,"To score a hit with a ranged weapon, the D6 result must equal or exceed the attack's Ballistic Skill (BS) characteristic:
+
+> ""If the result of the Hit roll is greater than or equal to the attack's Ballistic Skill (BS) characteristic (if the attack is being made with a ranged weapon) or its Weapon Skill (WS) characteristic (if the attack is being made with a melee weapon), then that Hit roll is successful and scores one hit against the target unit."""
+"What are the rules regarding the points limit for placing units into Strategic Reserves before the battle, and how do those units arrive later as Reinforcements during the Movement phase?",1.0,0.22,0.0,0.6666666666666666,Rulebook,"Based on the provided rules, the points limit and arrival rules for Strategic Reserves are as follows:
+
+**Points Limit:**
+> ""The combined points value of all the units you wish to place into Strategic Reserves before the battle (including those embarked within Transport models that are themselves placed into Strategic Reserves) cannot exceed 25% of your total points limit for your chosen battle size, as shown in the table below.""
+> - ""Combined points value cannot exceed 25% of your army's total.""
+
+**Arriving Later (Reinforcements):**
+> ""Units that are placed into Strategic Reserves are called Strategic Reserves units, and can arrive later in the battle during the Reinforcements step of any of your Movement phases except during the first battle round.""
+> - ""Strategic Reserves units can arrive in the Reinforcements step of your Movement phase, from the second battle round onwards."""
+Can u plz explane how the rules for selecting targets differ when a model is makeing ranged weapons attacks in the shooting phase compare to when it is resolveing melee attacks?,0.8,0.67,0.0,1.0,Rulebook,"Based on the provided context, the rules for selecting targets differ between ranged and melee attacks in the following ways:
+
+* **Ranged Weapons (Shooting Phase):** 
+  ""Each time you select a target for a model's ranged weapon, you can only select an enemy unit as the target if at least one model in that unit is both within range of that weapon and visible to that attacking model (pg 8)."" Additionally, ""Before a unit shoots, select the targets for all of its ranged weapons."" Furthermore, while a model can shoot different weapons at different targets, it ""cannot split attacks from the same weapon across more than one target.""
+
+* **Melee Attacks:** 
+  ""In order to select an enemy unit as the target of a melee attack, the attacking model must be either within Engagement Range of that enemy unit, or in base-to-base contact with another model in its own unit that is itself in base-to-base contact with that enemy unit."" Additionally, if a melee weapon can make more than one attack, ""those attacks can all be made against the same target, or they can be split between different targets."""
+Can u tell me how the rules for spliting attacks differ between ranged weapons when firing at multiple targets and melee attacks when selecting targets in base-to-base contact?,1.0,1.0,0.0,1.0,Rulebook,"Based on the provided context, the rules differ in the following way:
+
+For ranged weapons, individual models cannot split attacks from the same weapon across more than one target:
+> ""Models with more than one ranged weapon can shoot them at the same or different targets, but models cannot split attacks from the same weapon across more than one target.""
+
+In contrast, for melee weapons, if a weapon can make more than one attack, those attacks can be split between different targets:
+> ""If the melee weapon a model is using to fight with can make more than one attack, those attacks can all be made against the same target, or they can be split between different targets."""
+How do terrain features and invulnerable saves interact when allocating a ranged attack to a model?,1.0,0.44,0.0,0.6666666666666666,Rulebook,"Based on the provided rules, invulnerable saves and the Benefit of Cover interact such that the bonus provided by cover excludes invulnerable saving throws. Specifically, the rules state:
+
+> ""Each time a ranged attack is allocated to a model that has the Benefit of Cover, add 1 to the saving throw made for that attack (excluding invulnerable saving throws)."""
+What happens during the movement phase if an aircraft model crosses the battlefield edge or fails to complete its minimum straight move?,1.0,0.0,0.0,0.0,Rulebook,The provided context does not cover what happens during the movement phase if an aircraft model crosses the battlefield edge or fails to complete its minimum straight move; this information is missing from the context.
+"If transport make Fall Back move, can unit disembark from it, and what happen when models do this move over enemy models?",1.0,0.93,0.0,1.0,Rulebook,"Based on the provided rules:
+
+1. Regarding whether a unit can disembark from a Transport that made a Fall Back move:
+> ""Units cannot disembark from a Transport model that either Advanced or Fell Back this turn.""
+
+2. Regarding what happens when models make a Fall Back move over enemy models (Desperate Escape Tests):
+> ""Models can move over enemy models when Falling Back, but you must take Desperate Escape tests for them before they do so (excluding models that are Titanic or can Fly).""
+> ""Desperate Escape Test: Roll one D6. On a 1-2, one model from that unit is destroyed."""
+Can u tell me how the Movement phase works when u start by selecting units to move and also what happens if those units disembark from a Transport model?,1.0,0.75,0.0,1.0,Rulebook,"To start the Movement phase:
+
+> ""Start your Movement phase by selecting one unit from your army that is on the battlefield to move:
+> - ■ Unless that unit is within Engagement Range of any enemy models, it can make a Normal move, or Advance, or Remain Stationary.
+> - ■ If that unit is within Engagement Range of any enemy models, it can either Remain Stationary or Fall Back.  
+> After you have finished moving that unit, select another unit from your army to move, and so on, until you have done so with all of your units. Once you have moved all of your units, progress to the Reinforcements step of your Movement phase.""
+
+Regarding units disembarking from a Transport model:
+
+> ""If a unit from your army starts your Movement phase embarked within a Transport model, that unit can disembark in that phase.""
+
+> ""When a unit disembarks from a Transport model, set it up on the battlefield so that it is wholly within 3"" of that Transport model and not within Engagement Range of any enemy models. If, for any reason, a disembarking model cannot be set up, that model's unit cannot disembark.""
+
+Depending on the Transport's movement, disembarking units are subject to the following rules:
+- **Transport Remained Stationary or hasn't moved yet:** ""Units that disembark from a Transport model that either Remained Stationary this phase or has not yet made a Normal, Advance or Fall Back move this phase can then act normally (make a Normal move, Advance, shoot, declare a charge, fight, etc.) in the remainder of the turn. Such a disembarking unit cannot choose to Remain Stationary.""
+- **Transport made a Normal move:** ""Units that disembark from a Transport model that made a Normal move this phase count as having made a Normal move themselves; they cannot move further during this phase. Such a unit also cannot declare a charge in the same turn, but can otherwise act normally in the remainder of the turn.""
+- **Transport Advanced or Fell Back:** ""Units cannot disembark from a Transport model that either Advanced or Fell Back this turn.""
+- **Disembarking before the Transport moves:** ""If a unit disembarks before its Transport moves, it can act normally.""
+- **Disembarking after the Transport moves:** ""If a unit disembarks after its Transport moves, it cannot move or charge this turn, but can otherwise act normally."""
+"What causes an Aircraft model to be placed into Strategic Reserves during a match, and how does this differ from pre-battle deployment limits for Strategic Reserves?",0.6666666666666666,0.33,0.0,0.5,Rulebook,"Based on the provided context, an Aircraft model is placed into Strategic Reserves during a match under the following circumstances:
+- ""When you are instructed to Declare Battle Formations, Aircraft models must start the battle in Reserves instead of being set up on the battlefield. Once the battle has started, Aircraft models are then treated as Strategic Reserves units for all rules purposes (pg 43).""
+- ""Aircraft that cross the edge of the battlefield, or that cannot make their minimum move, are placed into Strategic Reserves.""
+
+Regarding how this differs from pre-battle deployment limits for Strategic Reserves, the provided context does not cover pre-battle deployment limits for Strategic Reserves, so I cannot answer that part of the question."

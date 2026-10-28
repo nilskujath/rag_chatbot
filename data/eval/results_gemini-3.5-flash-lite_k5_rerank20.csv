@@ -1,0 +1,131 @@
+user_input,channel,route,faithfulness,factual_correctness(mode=f1),llm_context_precision_with_reference,context_recall,response
+Movement phase aircraft rules,,text,1.0,0.36,0.0,0.4,"Based on the provided context, the rules for Aircraft in the Movement phase are as follows:
+
+* ""Aircraft models cannot Advance, Fall Back or Remain Stationary.""
+* ""If, when an Aircraft model is selected to move in the Movement phase, any enemy units are within Engagement Range of it, that Aircraft model can still make a Normal move.""
+* When other units are selected to move, ""if the only enemy models that are within Engagement Range of that unit are Aircraft models, then that unit can still make a Normal or Advance move.""
+* ""Whenever a model makes any kind of move, it can be moved over enemy Aircraft models as if they were not there, and can be moved within Engagement Range of enemy Aircraft models, but it cannot end that move on top of another model or within Engagement Range of any enemy Aircraft models."""
+What is the maximum combined points value permitted for units placed into Strategic Reserves before a Strike Force battle?,,text,1.0,1.0,0.9999999999,1.0,"For a Strike Force battle, the maximum combined points value of units that can be placed into Strategic Reserves before the battle is 500. 
+
+Relevant rule text:
+> | Strike Force | 500 |"
+How do shooting restrictions for a Monster model equipped with Pistols differ from other models?,,text,1.0,1.0,0.9999999999,1.0,"Based on the provided context, shooting restrictions differ for a Monster model equipped with Pistols in the following ways:
+
+1. **Weapon Selection:** While other models equipped with Pistols must choose to either shoot with their Pistols *or* with all of their other ranged weapons, Monsters are explicitly exempted from this restriction:
+   > ""If a model is equipped with one or more Pistols, unless it is a Monster or Vehicle model, it can either shoot with its Pistols or with all of its other ranged weapons.""
+
+2. **Combination of Weapons:** Other models cannot shoot Pistols alongside any other non-Pistol weapon, whereas Monsters can:
+   > ""Cannot be shot alongside any other non-Pistol weapon (except by a Monster or Vehicle)."""
+Hey what do I need to roll on my D6 compared to my model BS to score a hit with a ranged weapon?,,text,1.0,0.8,0.8333333332916666,1.0,"To score a hit with a ranged weapon, you need a D6 result that equals or exceeds the attack's Ballistic Skill (BS) characteristic:
+
+> ""If the result of the Hit roll is greater than or equal to the attack's Ballistic Skill (BS) characteristic (if the attack is being made with a ranged weapon)... then that Hit roll is successful and scores one hit against the target unit."""
+"What are the rules regarding the points limit for placing units into Strategic Reserves before the battle, and how do those units arrive later as Reinforcements during the Movement phase?",,text,1.0,0.5,0.0,0.6666666666666666,"Based on the provided rules:
+
+**Points Limit for Strategic Reserves:**
+Before the battle, when declaring battle formations, you can place one or more units (excluding Fortifications) into Strategic Reserves. As stated in the rules:
+> ""The combined points value of all the units you wish to place into Strategic Reserves before the battle (including those embarked within Transport models that are themselves placed into Strategic Reserves) cannot exceed 25% of your total points limit for your chosen battle size...""
+
+**Arriving as Reinforcements:**
+Strategic Reserves units can arrive later in the battle during the Reinforcements step of your Movement phases (except during the first battle round). Specifically:
+> ""- ■ Strategic Reserves units can arrive in the Reinforcements step of your Movement phase, from the second battle round onwards.""
+> ""- ■ Those not on the battlefield at the end of the battle count as destroyed.""
+
+Depending on the battle round, they must be set up according to the following restrictions:
+* **During the second battle round:** They must be set up ""wholly within 6"" of any battlefield edge, but no model in those units can be set up within the enemy deployment zone.""
+* **Starting from the third battle round:** They must be set up ""wholly within 6"" of any battlefield edge.""
+
+In all cases, ""Strategic Reserves units cannot be set up within 9"" horizontally of any enemy models."""
+Can u plz explane how the rules for selecting targets differ when a model is makeing ranged weapons attacks in the shooting phase compare to when it is resolveing melee attacks?,,text,0.8571428571428571,0.5,0.0,0.5,"Based on the provided context, the rules for selecting targets differ between ranged and melee attacks in the following ways:
+
+* **Ranged Weapons (Shooting Phase):** 
+  > ""Each time you select a target for a model's ranged weapon, you can only select an enemy unit as the target if at least one model in that unit is both within range of that weapon and visible to that attacking model (pg 8). An enemy model is within range of a weapon if the distance between it and the attacking model is equal to or less than that weapon's Range characteristic.""
+
+* **Melee Attacks:** 
+  > ""In order to select an enemy unit as the target of a melee attack, the attacking model must be either within Engagement Range of that enemy unit, or in base-to-base contact with another model in its own unit that is itself in base-to-base contact with that enemy unit."""
+Can u tell me how the rules for spliting attacks differ between ranged weapons when firing at multiple targets and melee attacks when selecting targets in base-to-base contact?,,text,1.0,1.0,0.0,1.0,"Based on the provided context, the rules for splitting attacks differ between ranged and melee weapons in the following ways:
+
+* **For ranged attacks:** A model ""can shoot all of [its ranged weapons] at the same target or it can shoot each of them at a different target, but it **cannot split attacks from the same weapon across more than one target**.""
+* **For melee attacks:** If a melee weapon ""can make more than one attack, **those attacks can all be made against the same target, or they can be split between different targets**."""
+How do terrain features and invulnerable saves interact when allocating a ranged attack to a model?,,text,0.75,0.6,0.0,0.3333333333333333,"Based on the provided context, invulnerable saving throws are excluded when adding 1 to the saving throw for a ranged attack allocated to a model that has the Benefit of Cover. 
+
+The rule states:
+> ""Each time a ranged attack is allocated to a model that has the Benefit of Cover, add 1 to the saving throw made for that attack (excluding invulnerable saving throws)."""
+What happens during the movement phase if an aircraft model crosses the battlefield edge or fails to complete its minimum straight move?,,text,1.0,0.5,0.99999999995,1.0,"Based on the rules, if an Aircraft model crosses the edge of the battlefield or cannot move a minimum of 20"", ""that model's move ends and it is placed into Strategic Reserves."" 
+
+The relevant rule text states:
+> ""If, when making a Normal move, any part of an Aircraft model's base crosses the edge of the battlefield, or it cannot move a minimum of 20"", that model's move ends and it is placed into Strategic Reserves."""
+"If transport make Fall Back move, can unit disembark from it, and what happen when models do this move over enemy models?",,text,0.8,0.33,0.0,0.3333333333333333,"Based on the provided rules:
+
+1. **Can a unit disembark from a Transport that made a Fall Back move?**  
+No. The rules state:  
+> ""Units cannot disembark from a Transport model that either Advanced or Fell Back this turn.""
+
+2. **What happens when models do a Fall Back move over enemy models?**  
+The context does not cover what happens when models move over enemy models during a Fall Back move (it only states that when a unit Falls Back, ""you can move it within Engagement Range of enemy models, provided it does not end that move within Engagement Range of any enemy models"")."
+Can u tell me how the Movement phase works when u start by selecting units to move and also what happens if those units disembark from a Transport model?,,text,1.0,0.83,0.0,1.0,"To start the Movement phase, you begin by selecting one unit from your army that is on the battlefield to move:
+
+> ""Start your Movement phase by selecting one unit from your army that is on the battlefield to move:  
+> - ■ Unless that unit is within Engagement Range of any enemy models, it can make a Normal move, or Advance, or Remain Stationary.  
+> - ■ If that unit is within Engagement Range of any enemy models, it can either Remain Stationary or Fall Back.""
+
+Once you finish moving that unit, you select another unit to move, and continue until all units have moved. 
+
+Regarding units that disembark from a Transport model, if a unit starts your Movement phase embarked within a Transport, it can disembark in that phase:
+
+> ""When a unit disembarks from a Transport model, set it up on the battlefield so that it is wholly within 3"" of that Transport model and not within Engagement Range of any enemy models. If, for any reason, a disembarking model cannot be set up, that model's unit cannot disembark.""
+
+Depending on when the Transport moves relative to the disembarkation, the rules state:
+* **If the Transport Remained Stationary or has not yet made a move this phase:** ""Units that disembark from a Transport model that either Remained Stationary this phase or has not yet made a Normal, Advance or Fall Back move this phase can then act normally (make a Normal move, Advance, shoot, declare a charge, fight, etc.) in the remainder of the turn. Such a disembarking unit cannot choose to Remain Stationary.""
+* **If the Transport made a Normal move this phase:** ""Units that disembark from a Transport model that made a Normal move this phase count as having made a Normal move themselves; they cannot move further during this phase. Such a unit also cannot declare a charge in the same turn, but can otherwise act normally in the remainder of the turn.""
+* **If the Transport Advanced or Fell Back:** ""Units cannot disembark from a Transport model that either Advanced or Fell Back this turn."""
+"What causes an Aircraft model to be placed into Strategic Reserves during a match, and how does this differ from pre-battle deployment limits for Strategic Reserves?",,text,1.0,0.31,0.0,1.0,"An Aircraft model is placed into Strategic Reserves during a match under the following conditions:
+- ""Aircraft that cross the edge of the battlefield, or that cannot make their minimum move, are placed into Strategic Reserves.""
+- ""If placed into Strategic Reserves, an Aircraft model will always arrive from Strategic Reserves in your next turn.""
+
+The context does not cover how this differs from pre-battle deployment limits for Strategic Reserves (the table showing the points limit percentage is missing from the provided text)."
+"What are the characteristics of an Intercessor Squad model: Movement, Toughness, Save, Wounds, Leadership and Objective Control?",sql,sql,1.0,0.8,0.9999999999,1.0,"Based on the database records for the Intercessor Squad, the characteristics of the models typically have a Movement of 6"" (with one model variant at 5""), a Toughness of 4 (with one variant at 6), a Save of 3+, Wounds of 2 (with one variant at 3), a Leadership of 6+, and an Objective Control of 2. 
+
+The specific values from the records are:
+* **Movement (m):** 6"" (ranging from 5"" to 6"")
+* **Toughness (t):** 4 (ranging from 4 to 6)
+* **Save (sv):** 3+
+* **Wounds (w):** 2 (ranging from 2 to 3)
+* **Leadership (ld):** 6+
+* **Objective Control (oc):** 2"
+What is the profile of the bolt rifle carried by an Intercessor Squad?,sql,sql,1.0,0.0,0.9999999999,1.0,"Based on the database, the profile of the bolt rifle carried by an Intercessor Squad is:
+
+* **Name:** Bolt rifle
+* **Range:** 24
+* **Type:** Ranged
+* **A:** 2
+* **BS/WS:** 3
+* **S:** 4
+* **AP:** -1
+* **D:** 1"
+"How many points does an Intercessor Squad cost with 5 models, and with 10 models?",sql,sql,1.0,0.57,0.9999999999,1.0,"Based on the database records for the Intercessor Squad, an Intercessor Squad with 5 models typically costs 75, 80, or 100 points, and with 10 models, it typically costs 150 or 200 points."
+"What is the Toughness of an Ork Boyz model, and how does Toughness affect the Wound roll?",both,both,1.0,0.63,0.0,1.0,"Based on the provided context, most models in the Ork Boyz datasheets (such as the Boy, Boss Nob, Burna Boyz, Stormboy, Beast Snagga Boy, Beast Snagga Nob, and Breaka Boy) have a Toughness of **5**, while others (like the Nob On Smasha Squig and Squighog Boyz) have a Toughness of **7**. 
+
+Toughness reflects ""the model's resilience against physical harm,"" and it affects the Wound roll by comparing the attack's Strength (S) characteristic with the target's Toughness (T) characteristic to determine the D6 result required:
+
+* ""Strength is TWICE (or more than twice) the Toughness. | 2+""
+* ""Strength is GREATER than the Toughness. | 3+""
+* ""Strength is EQUAL to the Toughness. | 4+""
+* ""Strength is LESS than the Toughness. | 5+""
+* ""Strength is HALF (or less than half) the Toughness. | 6+"""
+What is the rule for grenades?,text,text,1.0,1.0,0.9999999999,1.0,"The rule for Grenades is:
+
+> **GRENADE**  
+> CORE - WARGEAR STRATAGEM  
+> Priming their hand-held projectiles, these warriors draw back and hurl death into the enemy's midst.  
+> WHEN: Your Shooting phase.  
+> TARGET: One Grenades unit from your army that is not within Engagement Range of any enemy units and has not been selected to shoot this phase.  
+> EFFECT: Select one enemy unit that is not within Engagement Range of any units from your army and is within 8"" of and visible to your Grenades unit. Roll six D6: for each 4+, that enemy unit suffers 1 mortal wound."
+How can I use a stratagem?,text,text,1.0,0.6,0.0,1.0,"To use a Stratagem, you must spend Command Points (CP):
+
+> ""When you use a Stratagem, reduce your CP total by the amount listed on that Stratagem. If you do not have enough CP for a specific Stratagem, you cannot use it.""
+> - ""To use a Stratagem you must pay the CP specified."""
+What are the different ways to score points?,text,text,1.0,0.59,0.0,0.75,"Based on the provided context, points are scored as Victory points (VP) by ""achieving various objectives, from recovering vital relics to capturing enemy strongholds or eliminating the opposing Warlord."" 
+
+Specifically, under the Capture and Control mission rules:
+> ""Starting from the second battle round, at the end of each player's Command phase, the player whose turn it is scores 1 Victory point (VP) for each objective marker they control (to a maximum of 3VP per turn)."""
+What is the toughness of a space marine?,sql,sql,1.0,0.5,0.9999999999,1.0,"Based on the database records, the toughness characteristic of a Space Marine is 4."
