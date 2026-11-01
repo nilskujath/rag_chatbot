@@ -221,3 +221,31 @@ flowchart TB
 ```
 
 The router rewrites the question into a standalone query from the conversation so far; that is what turns "and a Terminator?" into "What is the toughness of a Terminator?" (Example session above). Only the messages are kept between turns, the retrieved passages are not. The reranker is there because it measurably helps (context precision 0.20 to 0.32, see Evaluation). The database is opened read-only so nothing can be changed and only a single SELECT query is allowed. All Gemini calls go through `llm/gemini.py`, which throttles to 10 calls per minute and retries on quota errors.
+
+
+### Evaluating the system
+
+This covers `make gen-testset` (done once, the result is committed) and `make eval`.
+
+```mermaid
+%%{init: {"flowchart": {"wrappingWidth": 600}}}%%
+flowchart TB
+    MD[("data/processed/core_rules.md")]
+    G["RAGAS test-set generator<br/>scripts/generate_testset.py<br/>input: 25 random sections of the markdown<br/>output: question, reference answer, source passage"]
+    H["manual review<br/>weak questions dropped<br/>8 questions added by hand, each with its expected route"]
+    TS[("data/eval/testset.jsonl<br/>20 questions, committed")]
+    E["answer the questions<br/>scripts/eval_retrieval.py<br/>same agent as make chat, new conversation per question<br/>checkpoint: data/eval/answers_<config>.jsonl"]
+    J["RAGAS scoring<br/>judge model gemini-3.1-flash-lite<br/>faithfulness, factual correctness,<br/>context precision, context recall"]
+    RS[("data/eval/results_*.csv<br/>scores, expected route and route taken per question<br/>(this is also committed)")]
+    O(["terminal: mean scores, per route, routing accuracy"])
+
+    MD --> G --> H --> TS --> E --> J --> RS --> O
+
+    classDef file fill:#1f2937,stroke:#9ca3af,color:#e5e7eb
+    classDef step fill:#111827,stroke:#60a5fa,color:#e5e7eb
+    class MD,TS,RS file
+    class G,H,E,J step
+    class O file
+```
+
+The test set is frozen in git so that two runs can be compared; RAGAS generated the rulebook questions, we wrote the database ones by hand because RAGAS only reads text. The judge is a different Gemini model from the one that answers, as the course recommends. The output files carry the configuration in their name (`answers_gemini-3.5-flash-lite_k5_rerank20.jsonl`), so a changed setting never reuses old answers. The numbers are in the Evaluation section below.
