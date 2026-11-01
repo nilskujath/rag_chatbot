@@ -312,3 +312,4 @@ data/eval/             test set and results (committed)
 ## Tests
 
 `make test` runs 57 unit tests. They need no network and no API key, the LLM is replaced by a fake, the SQL tests use a small SQLite database created on the fly, and the vector store test runs on sqlite-vec itself. The tests were largely written with a coding agent and reviewed by us. `make lint` runs ruff, and the pre-commit hook runs the same check on every commit.
+
