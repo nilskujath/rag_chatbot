@@ -144,6 +144,7 @@ sources: Game database
 This covers the commands `make parse` (PDF to markdown; optional, the output is committed because Docling takes quite long) and `make index` (markdown to vector store):
 
 ```mermaid
+%%{init: {"flowchart": {"htmlLabels": false, "wrappingWidth": 500}}}%%
 flowchart TB
     PDF[("data/raw/core_rules.pdf<br/>course material, not in git")]
     P["DoclingParser<br/><code>parser/docling_parser.py</code><br/>make parse"]
