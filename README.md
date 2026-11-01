@@ -1,5 +1,9 @@
 # Course project: Warhammer 40,000 chatbot
 
+Authors: Nils KUJATH and Varvara SMIRNOVA
+
+Course: Retrieval Augmented Generation (Year 2026/27)
+
 ## Quick start
 
 Prerequisites: Python 3.11 or newer and [Poetry](https://python-poetry.org/) 2 (the lock file is in the Poetry 2 format).
@@ -253,7 +257,7 @@ The test set is frozen in git so that two runs can be compared; RAGAS generated 
 
 ## Evaluation
 
-Run of 2026-10-28, answers by `gemini-3.5-flash-lite`, judge `gemini-3.1-flash-lite`,the 5 best of 20 retrieved passages (`data/eval/results_gemini-3.5-flash-lite_k5_rerank20.csv`):
+Run of 2026-10-28, answers by `gemini-3.5-flash-lite`, judge `gemini-3.1-flash-lite`, the 5 best of 20 retrieved passages (`data/eval/results_gemini-3.5-flash-lite_k5_rerank20.csv`):
 
 | Metric | All 20 | Rulebook (15) | Database (4) | Both (1) |
 |---|---|---|---|---|
@@ -284,3 +288,27 @@ Monitoring. The trace in the chat shows route, rewritten query, SQL and the late
 - `gemini-3.5-flash` answers better but allows 20 requests a day, so everything runs on flash-lite. One evaluation run takes about 45 minutes because of the rate limit;
 - A follow-up without context ("and a Terminator?" right after `/reset`) gets a broad SQL query and a partial answer; asking the user back would be the fix;
 - Keyword search (BM25) in addition to the vector search did not change the retrieved chunks for the four course questions, so we dropped it.
+
+## Repository layout
+
+Here is a quick overview to see what is where:
+
+```
+src/rag_chatbot/
+  settings.py          all parameters (pydantic-settings)
+  llm/                 Gemini client: generate(), stream(), rate limiter, retries
+  parser/              DoclingParser
+  chunker/             MarkdownChunker, Chunk
+  storage/             Embedder, SqliteVecStore
+  retriever/           TextRetriever, Reranker, SqlRetriever
+  agent/               langgraph graph, nodes (router, retrieve, final_answer), check_setup
+  evaluate/            RAGAS adapters
+scripts/               parse, index, chat, ask_sql, generate_testset, eval_retrieval
+tests/                 unit tests
+data/processed/        parsed rulebook (committed)
+data/eval/             test set and results (committed)
+```
+
+## Tests
+
+`make test` runs 57 unit tests. They need no network and no API key, the LLM is replaced by a fake, the SQL tests use a small SQLite database created on the fly, and the vector store test runs on sqlite-vec itself. The tests were largely written with a coding agent and reviewed by us. `make lint` runs ruff, and the pre-commit hook runs the same check on every commit.
