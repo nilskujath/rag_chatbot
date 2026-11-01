@@ -27,3 +27,113 @@ models (about 180 MB); a warning about an unset `HF_TOKEN` is expected and
 harmless.
 
 `make help` lists every command.
+
+
+## Example session
+
+In the following we will show an example session that assumes that the quickstart guide has been followed up until running `make chat`.
+The chat has three commands: `/trace` toggles the trace lines, `/reset` starts a new conversation, `/quit` leaves (they come from `scripts/chat.py`).
+
+We use the four questions the first slide deck of the course names. We ask the last question again after running `/reset` to show that the context is missing as to what it asks about the terminator, so the query is too broad and thus the query returns too much for the model to get a complete picture.
+
+```bash
+Warhammer 40k rules assistant
+/reset new conversation   /trace toggle the trace   /quit quit
+
+> What is the rule for grenades?
+INFO     LLM gemini-3.5-flash-lite: 0.9s                                        
+INFO     router: route=text query='What is the rule for grenades?'              
+INFO     LLM gemini-3.5-flash-lite (stream): 5.3s                               
+According to the rules, the Grenade rule is as follows:                         
+
+▌ "WHEN: Your Shooting phase. TARGET: One Grenades unit from your army that is
+▌ not within Engagement Range of any enemy units and has not been selected to 
+▌ shoot this phase. EFFECT: Select one enemy unit that is not within          
+▌ Engagement Range of any units from your army and is within 8" of and visible
+▌ to your Grenades unit. Roll six D6: for each 4+, that enemy unit suffers 1  
+▌ mortal wound."                                                              
+sources: Rulebook
+
+> /trace
+trace off
+> How can I use a stratagem?
+According to the rules, command points can be spent to use Stratagems.          
+Specifically:                                                                   
+
+▌ "When you use a Stratagem, reduce your CP total by the amount listed on that
+▌ Stratagem. If you do not have enough CP for a specific Stratagem, you cannot
+▌ use it. You can use the same Stratagem multiple times during a battle, but  
+▌ you cannot use the same Stratagem more than once in the same phase."        
+
+Additionally, the rules state:                                                  
+
+ • "To use a Stratagem you must pay the CP specified."                          
+ • "The same Stratagem cannot be used more than once in the same phase."        
+sources: Rulebook
+
+> What are the different ways to score points?
+Based on the provided rules, games of Warhammer 40,000 are won by:              
+
+▌ "scoring more Victory points than your opponent through achieving various   
+▌ objectives, from recovering vital relics to capturing enemy strongholds or  
+▌ eliminating the opposing Warlord."                                          
+
+Additionally, regarding progressive objectives such as Capture and Control,     
+players score points as follows:                                                
+
+▌ "Starting from the second battle round, at the end of each player's Command 
+▌ phase, the player whose turn it is scores 1 Victory point (VP) for each     
+▌ objective marker they control (to a maximum of 3VP per turn)."              
+sources: Rulebook
+
+> /trace
+trace on
+> What is the toughness of a space marine?
+INFO     LLM gemini-3.5-flash-lite: 0.6s                                        
+INFO     router: route=sql query='What is the Toughness of a Space Marine?'     
+INFO     LLM gemini-3.5-flash-lite: 6.3s                                        
+INFO     SQL: SELECT dm.t FROM datasheets d JOIN datasheets_models dm ON        
+         dm.DatasheetId = d.Id WHERE d.name LIKE '%Space Marine%'               
+INFO     LLM gemini-3.5-flash-lite (stream): 5.9s                               
+Based on the provided game database, the toughness (t) of a Space Marine is 4.  
+sources: Game database
+
+> and a Terminator?
+INFO     LLM gemini-3.5-flash-lite: 0.7s                                        
+INFO     router: route=sql query='What is the toughness of a Terminator?'       
+INFO     LLM gemini-3.5-flash-lite: 6.6s                                        
+INFO     SQL: SELECT dm.t FROM datasheets d JOIN datasheets_models dm ON        
+         dm.DatasheetId = d.Id WHERE d.name LIKE '%Terminator%'                 
+INFO     LLM gemini-3.5-flash-lite (stream): 5.4s                               
+Based on the provided game database, the toughness (t) of models with           
+"Terminator" in their name typically ranges from 4 to 11, with 5 being the most 
+common value.                                                                   
+sources: Game database
+
+> /reset
+new conversation
+> and a Terminator?
+INFO     LLM gemini-3.5-flash-lite: 0.7s                                        
+INFO     router: route=sql query='Terminator stats datasheets points weapons    
+         abilities'                                                             
+INFO     LLM gemini-3.5-flash-lite: 6.7s                                        
+INFO     SQL: SELECT d.name AS datasheet_name, dm.name AS model_name, dm.m,     
+         dm.t, dm.sv, dm.invSv, dm.invSvDescr, dm.w, dm.ld, dm.oc, dm.baseSize, 
+         dm.baseSizeDescr, dmc.description AS cost_description, dmc.cost,       
+         dw.name AS weapon_name, dw.range, dw.type AS weapon_type, dw.a AS      
+         attacks, dw.bsWs, dw.s AS strength, dw.ap, dw.d AS damage, da.name AS  
+         ability_name, da.description AS ability_description FROM datasheets d  
+         JOIN datasheets_models dm ON dm.DatasheetId = d.Id LEFT JOIN           
+         datasheets_models_cost dmc ON dmc.DatasheetId = d.Id LEFT JOIN         
+         datasheets_wargear dw ON dw.DatasheetId = d.Id LEFT JOIN               
+         datasheets_abilities da ON da.DatasheetId = d.Id WHERE d.name LIKE     
+         '%Terminator%';                                                        
+INFO     LLM gemini-3.5-flash-lite (stream): 5.4s                               
+The provided database results are incomplete and do not cover the rules or stats
+for a standard "Terminator" datasheet (only the first 50 rows are shown, which  
+are restricted to the Shield-captain In Allarus Terminator Armour).             
+sources: Game database
+
+> /quit
+```
+
