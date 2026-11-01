@@ -249,3 +249,30 @@ flowchart TB
 ```
 
 The test set is frozen in git so that two runs can be compared; RAGAS generated the rulebook questions, we wrote the database ones by hand because RAGAS only reads text. The judge is a different Gemini model from the one that answers, as the course recommends. The output files carry the configuration in their name (`answers_gemini-3.5-flash-lite_k5_rerank20.jsonl`), so a changed setting never reuses old answers. The numbers are in the Evaluation section below.
+
+
+## Evaluation
+
+Run of 2026-10-28, answers by `gemini-3.5-flash-lite`, judge `gemini-3.1-flash-lite`,the 5 best of 20 retrieved passages (`data/eval/results_gemini-3.5-flash-lite_k5_rerank20.csv`):
+
+| Metric | All 20 | Rulebook (15) | Database (4) | Both (1) |
+|---|---|---|---|---|
+| Faithfulness | 0.97 | 0.96 | 1.00 | 1.00 |
+| Factual correctness (F1) | 0.62 | 0.66 | 0.47 | 0.63 |
+| Context precision | 0.44 | 0.32 | 1.00 | 0.00 |
+| Context recall | 0.85 | 0.80 | 1.00 | 1.00 |
+
+Routing accuracy on the 8 labelled questions: 8/8. The factual correctness is lower than it should be, because the judge punishes wording (e.g.,the bolt-rifle answer got every number right but scored 0 since it uses the database's column names (A, BS/WS) where the reference answer uses the rulebook's words, "Attacks" and "Ballistic Skill").
+
+Reranker on the 12 RAGAS questions (baseline `data/eval/results_gemini-3.5-flash-lite_k5_rerank0.csv`):
+
+| Metric | without | with |
+|---|---|---|
+| Faithfulness | 0.94 | 0.95 |
+| Factual correctness (F1) | 0.57 | 0.64 |
+| Context precision | 0.20 | 0.32 |
+| Context recall | 0.77 | 0.77 |
+
+The reranked answers were judged three times on three days and stayed within 0.05, so the gain is above the judge's noise.
+
+Monitoring. The trace in the chat shows route, rewritten query, SQL and the latency of every Gemini call (`/trace`). Every turn appends one JSON record (time, question, route, query, sources, SQL, seconds) to `data/logs/chat.jsonl`. With the free-tier model a rulebook turn takes about 7 seconds and a database turn about 13.
