@@ -276,3 +276,11 @@ Reranker on the 12 RAGAS questions (baseline `data/eval/results_gemini-3.5-flash
 The reranked answers were judged three times on three days and stayed within 0.05, so the gain is above the judge's noise.
 
 Monitoring. The trace in the chat shows route, rewritten query, SQL and the latency of every Gemini call (`/trace`). Every turn appends one JSON record (time, question, route, query, sources, SQL, seconds) to `data/logs/chat.jsonl`. With the free-tier model a rulebook turn takes about 7 seconds and a database turn about 13.
+
+
+## Limitations
+
+- Docling flattens every header of this rulebook to `##`, leaves 145 image placeholders, lost the dice values of the Wound-roll table and scrambled the contents page. The last two we fixed by hand in `core_rules.md`; a fresh `make parse` loses the fixes;
+- `gemini-3.5-flash` answers better but allows 20 requests a day, so everything runs on flash-lite. One evaluation run takes about 45 minutes because of the rate limit;
+- A follow-up without context ("and a Terminator?" right after `/reset`) gets a broad SQL query and a partial answer; asking the user back would be the fix;
+- Keyword search (BM25) in addition to the vector search did not change the retrieved chunks for the four course questions, so we dropped it.
