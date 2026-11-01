@@ -137,3 +137,31 @@ sources: Game database
 > /quit
 ```
 
+## Architecture
+
+### PDF to vector store 
+
+This covers the commands `make parse` (PDF to markdown; optional, the output is committed because Docling takes quite long) and `make index` (markdown to vector store):
+
+```mermaid
+flowchart TB
+    PDF[("data/raw/core_rules.pdf<br/>course material, not in git")]
+    P["DoclingParser<br/><code>parser/docling_parser.py</code><br/>make parse"]
+    MD[("data/processed/core_rules.md<br/>committed, no re-run of<br/>make parse necessary")]
+    C["MarkdownChunker<br/><code>chunker/markdown_chunker.py</code><br/>split at headers<br/>then 800 chars, 200 overlap<br/>drop chunks under 50 chars <br/> it will come out 290 chunks"]
+    E["Embedder<br/><code>storage/embedder.py</code><br/>all-MiniLM-L6-v2"]
+    V[("data/vectors.db<br/>SqliteVecStore, <code>storage/vector_store.py</code><br/>not in git, make index rebuilds it")]
+
+    PDF --> P --> MD --> C --> E --> V
+
+    classDef file fill:#1f2937,stroke:#9ca3af,color:#e5e7eb
+    classDef step fill:#111827,stroke:#60a5fa,color:#e5e7eb
+    class PDF,MD,V file
+    class P,C,E step
+```
+
+Docling takes some time, so we committed the result of running `make parse`. Two tables came out broken so we fixed them by hand (see limitations).
+We split at the headers before splitting by length. This keeps a
+rule inside one chunk and gives every chunk its section title.
+`make index` takes about 20 seconds and rebuilds the store from scratch.
+
