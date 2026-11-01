@@ -194,3 +194,30 @@ Every parameter (models, K, chunk sizes, row caps, rate limit) is a field of one
 The two sentence-transformers models are downloaded on the first run (about 180 MB) and cached afterwards; the Gemini client is built lazily on the first call, so importing the package never needs a key (so the tests run without providing a key in `.env` when run via `make test`).
 
 
+### Answering a question
+
+This explains what happens when we type a question in `make chat`.
+
+```mermaid
+%%{init: {"flowchart": {"wrappingWidth": 600}}}%%
+flowchart TB
+    Q(["question typed at the prompt"])
+    R["1. route the question<br/>router node, agent/nodes/router.py<br/>Gemini call (JSON mode, temperature 0)<br/>input: the question and the last 6 messages<br/>output: route = text, sql or both<br/>and a standalone query in the game's own words"]
+    T["2a. search the rulebook<br/>TextRetriever, retriever/text_retriever.py<br/>embed the query, 20 nearest chunks from vectors.db<br/>cross-encoder reranks them, keeps the 5 best<br/>Reranker, retriever/reranker.py"]
+    S["2b. query the database<br/>SqlRetriever, retriever/sql_retriever.py<br/>Gemini call: write one SELECT from the data dictionary<br/>refuse anything but a single SELECT<br/>run it read-only on wahadb.sqlite, keep 50 rows at most<br/>no rows or an error: ask Gemini once more with the error"]
+    A["3. write the answer<br/>final_answer node, agent/nodes/final_answer.py<br/>Gemini call, streamed<br/>input: the last 6 messages, the numbered passages, the question<br/>rule: answer from the passages, say what is missing"]
+    O(["answer streams to the terminal<br/>then the sources line<br/>one record appended to data/logs/chat.jsonl"])
+
+    Q --> R
+    R -->|text| T --> A
+    R -->|sql| S --> A
+    R -->|both| T2["2a, then 2b"] --> A
+    A --> O
+
+    classDef step fill:#111827,stroke:#60a5fa,color:#e5e7eb
+    classDef end_ fill:#1f2937,stroke:#9ca3af,color:#e5e7eb
+    class R,T,S,A,T2 step
+    class Q,O end_
+```
+
+The router rewrites the question into a standalone query from the conversation so far; that is what turns "and a Terminator?" into "What is the toughness of a Terminator?" (Example session above). Only the messages are kept between turns, the retrieved passages are not. The reranker is there because it measurably helps (context precision 0.20 to 0.32, see Evaluation). The database is opened read-only so nothing can be changed and only a single SELECT query is allowed. All Gemini calls go through `llm/gemini.py`, which throttles to 10 calls per minute and retries on quota errors.
