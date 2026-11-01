@@ -166,3 +166,31 @@ We split at the headers before splitting by length. This keeps a
 rule inside one chunk and gives every chunk its section title.
 `make index` takes about 20 seconds and rebuilds the store from scratch.
 
+### Starting the chat
+
+This covers `make chat` up to the prompt. The same checks from `check_setup` in `agent/workflow.py` run for `make ask-sql` and `make eval`.
+
+```mermaid
+%%{init: {"flowchart": {"wrappingWidth": 600}}}%%
+flowchart TB
+    S["read the settings<br/>settings.py: defaults for every parameter, .env overrides them"]
+    C["check the setup<br/>check_setup in agent/workflow.py<br/>is GOOGLE_API_KEY set?<br/>is data/tables/wahadb.sqlite there?<br/>is data/vectors.db there and filled?"]
+    D{all good?}
+    X(["stop: print what is missing and where to put it"])
+    B["build the agent<br/>build_default_agent in agent/workflow.py<br/>load the embedding model and the reranker model<br/>open the vector store and the data dictionary<br/>wire the two retrievers into the langgraph graph<br/>attach the conversation memory (MemorySaver)"]
+    P(["chat prompt, scripts/chat.py<br/>ready for the first question"])
+
+    S --> C --> D
+    D -->|no| X
+    D -->|yes| B --> P
+
+    classDef step fill:#111827,stroke:#60a5fa,color:#e5e7eb
+    classDef end_ fill:#1f2937,stroke:#9ca3af,color:#e5e7eb
+    class S,C,B step
+    class D,X,P end_
+```
+
+Every parameter (models, K, chunk sizes, row caps, rate limit) is a field of one pydantic-settings class with a default, so a fresh clone runs with nothing but the key in `.env`. The check at start-up exists so that a missing file produces one line that says what to copy where.
+The two sentence-transformers models are downloaded on the first run (about 180 MB) and cached afterwards; the Gemini client is built lazily on the first call, so importing the package never needs a key (so the tests run without providing a key in `.env` when run via `make test`).
+
+
